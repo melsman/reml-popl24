@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 LABEL description="Artifact for the paper *Explicit Effects and Effect Constraints in ReML* submitted to POPL 2024"
 
 # Install tools
@@ -17,7 +17,7 @@ USER art
 WORKDIR /home/art/
 
 # Install MLKit
-ADD --chown=art https://github.com/melsman/mlkit/releases/download/v4.7.4/mlkit-bin-dist-linux.tgz ./
+ADD --chown=art https://github.com/melsman/mlkit/releases/download/v4.7.5/mlkit-bin-dist-linux.tgz ./
 RUN tar xf mlkit-bin-dist-linux.tgz
 RUN make -C mlkit-bin-dist-linux install PREFIX=/home/art/mlkit
 ENV PATH=/home/art/mlkit/bin:$PATH
@@ -33,7 +33,7 @@ COPY --chown=art ./ reml-popl24/
 WORKDIR /home/art/reml-popl24
 
 # Install MLKit src
-ADD --chown=art https://github.com/melsman/mlkit/archive/refs/tags/v4.7.4.tar.gz ./
+ADD --chown=art https://github.com/melsman/mlkit/archive/refs/tags/v4.7.5.tar.gz ./
 RUN tar xf v4.7.4.tar.gz
 RUN rm -f v4.7.4.tar.gz
 

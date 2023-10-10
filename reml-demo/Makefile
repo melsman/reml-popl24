@@ -1,7 +1,6 @@
 FLAGS=-no_basislib -no_opt
-ROOT=~/gits/mlkit
-REML ?= $(ROOT)/bin/reml $(FLAGS)
-KITTESTER = $(ROOT)/bin/kittester
+REML ?= reml $(FLAGS)
+KITTESTER = kittester
 
 REMLSOURCES=er*.sml param.sml rec.sml tup.sml call.sml call2.sml ty1.sml err_expty1.sml err_expty2.sml \
   err_expty3.sml err_patty1.sml err_funty1.sml err_funty2.sml err_funty3.sml expty1.sml expty2.sml \
@@ -16,7 +15,7 @@ all: test tests.sml
 
 .PHONY: test
 test:
-	$(KITTESTER) "SML_LIB=$(ROOT) $(REML)" --logdirect all.tst
+	$(KITTESTER) "$(REML)" --logdirect all.tst
 
 tests.sml: $(REMLSOURCES)
 	echo '(* Testfiles *)' > $@

@@ -1,5 +1,5 @@
 FLAGS ?= -par
-REML ?= SML_LIB=~/gits/mlkit ~/gits/mlkit/bin/reml $(FLAGS)
+REML ?= reml $(FLAGS)
 
 .PHONY: all
 all: ray.res ray.exe

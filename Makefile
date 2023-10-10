@@ -9,6 +9,9 @@ clean:
 	make -C reml-demo clean
 	make -C reml-basis clean
 
+.PHONY: docker
+docker: reml-popl24.tar.gz
+
 reml-popl24.tar.gz: Dockerfile
-	sudo docker build . -t reml-popl24
-	sudo docker save reml-popl24:latest | gzip > $@
+	docker build --platform linux/amd64 -t reml-popl24 .
+	docker save reml-popl24:latest | gzip > $@

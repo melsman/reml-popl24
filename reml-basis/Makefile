@@ -1,8 +1,7 @@
 
 FLAGS ?=
 
-ROOT = ~/gits/mlkit
-REML = $(ROOT)/bin/reml
+REML = reml
 
 # Add "-Peffects -print_constraints -Ptypes -Pcee" to see the
 # resulting region-annotated internal representation

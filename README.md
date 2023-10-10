@@ -20,33 +20,32 @@ $ docker run -it reml-popl24:latest
 ```
 
 This command will put you into a shell inside a directory containing
-the experimental infrastructure.  Run `make` to compile and run the
-ReML test suite and all the examples. Running `make` should take less
-than 20 seconds.
+the experimental infrastructure.  Run `make all` to compile and run the
+ReML test suite and all the examples. Running `make all` should take less
+than a minute.
 
 ## Introduction
 
 This artifact includes (1) a tutorial aiming at demonstrating the
 features of ReML presented in the POPL 2024 paper "Explicit Effects
 and Effect Constraints in ReML", and (2) the source code for ReML,
-including a detailed description of the implementation aspects of ReML.
+including a description of the implementation aspects of ReML.
 
 A Standard ML program is also a ReML program and in ReML, source files
 are given to the ReML compiler (i.e., the `reml` executable) either as
 a single source file or as an mlb-file describing a directed acyclic
 graph (DAG) of source code files. The ReML compiler also accepts a
-series of flags, which can be printed using `reml --help` or `man
-reml`:
+series of flags, which can be printed using `reml --help`:
 
     $ reml --version
     ....
 
 For the sake of the tutorial, a pre-installed `reml-demo` folder is
-present in the home directory:
+present in the `reml-popl24` directory:
 
     $ cd reml-demo
 
-The `reml-demo` directory contains a series of ReML tests and a few more
+The `reml-demo` directory contains a series of ReML tests and a few
 serious examples.
 
 ## Tutorial
@@ -54,7 +53,8 @@ serious examples.
 The following subsections describe the basic ReML tests, the ReML
 parallel library, parallel Mergesort, parallel Mandelbrot, and a
 parallel ray-tracer. All tests and examples can be executed (and the
-output tested) by running `make` from within the `reml-demo` folder.
+output tested) by running `make all` from within the `reml-demo`
+folder.
 
 ### Running the ReML Tests
 
@@ -211,8 +211,8 @@ Whereas the `spawn` function is considered primitive in the sense that
 the constraint is there to provide guarantees about allocation races
 for the underlying implementation of `spawn`, all the functions in
 `ForkJoin-reml.sml` (`FORK_JOIN`) are implemented using `spawn` and
-the ReML constraint system is capable of establishing these
-constraints based on the constraint type provided for `spawn`.
+the ReML constraint system is capable of discharging these constraints
+based on the constraint type provided for `spawn`.
 
 ### Parallel Mergesort
 
@@ -298,16 +298,19 @@ This artifact is not intended as an extensible framework, but it is
 not too onerous to add new example.
 
 Each of the larger examples resides in their own folder in the
-`reml-demo` directory and is represented by an `.mlb` file that
-mentions the source files of the example, and its dependencies.
+`reml-demo` directory and is represented by an `.mlb` file (and a
+`Makefile`) that mentions the source files of the example, and its
+dependencies.
 
 The easiest way to add a new example is to copy `reml-demo/mergesort`
-(for example), give it a new name (including the `.mlb` file), and add
-it to the file `all.tst` in the `reml-demo` folder. Examples that
-compile successfully expects a file `file.mlb.out.ok`. Examples that
-are expected to halt with a compile time error appears with an "ecte"
-entry in the `all.tst` file. Examples are responsible for doing their own
-validation by writing to stderr (e.g., using `print`).
+(for example), give it a new name (including the `.mlb` file), modify
+the `Makefile`, and add it to the parent folders' `Makefile`. Examples
+that compile successfully expects a file `file.mlb.out.ok`. To add a
+new test, you may copy one of the existing tests, rename it, and add
+it to the `all.tst` file in the `reml-demo` folder. Examples that are
+expected to halt with a compile time error appears with an "ecte"
+entry in the `all.tst` file. Examples are responsible for doing their
+own validation by writing to stderr (e.g., using `print`).
 
 ## System Requirements
 
@@ -321,14 +324,14 @@ Internet, but running `make` does not.
 
 ### Building ReML from Source
 
-The Docker image contains source code for ReML v4.7.4, which is part
-of the MLKit distribution located in the folder `mlkit-4.7.4`. As an
+The Docker image contains source code for ReML v4.7.5, which is part
+of the MLKit distribution located in the folder `mlkit-4.7.5`. As an
 **optional first step** (before running the benchmarks), it is
 possible to compile and install ReML and the MLKit from source, using
 the following steps (ignore the possible error by `autobuild`):
 
 ```
-$ cd mlkit-4.7.3
+$ cd mlkit-4.7.5
 $ ./autobuild
 $ ./configure --with-compiler=mlkit --prefix=/home/art/mlkit
 $ make mlkit && make mlkit_basislibs
@@ -374,7 +377,7 @@ and its purpose.
 * `Makefile`: The commands executed when running `make`.  You can
   extract the commands if you need to run them out of order.
 
-* `mlkit-4.7.4`: Source directory for MLKit v4.7.4, which is the
+* `mlkit-4.7.5`: Source directory for MLKit v4.7.5, which is the
   source for the binary version of ReML and the MLKit, installed in
   the Docker image.
 
@@ -387,7 +390,7 @@ primarily in C. There is almost full support for the Standard ML Basis
 Library.
 
 As mentioned above, the source code is available in the folder
-`mlkit-4.7.4`. Below, we will briefly describe the major source code
+`mlkit-4.7.5`. Below, we will briefly describe the major source code
 components that contribute to the ReML additions of MLKit:
 
 - `src/Parsing`: ReML is backwards compatible with Standard ML and
