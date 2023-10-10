@@ -7,7 +7,7 @@ REMLSOURCES=er*.sml param.sml rec.sml tup.sml call.sml call2.sml ty1.sml err_exp
   nomut-err.sml nomut-ok.sml nomut2-err.sml disputs.sml disputs2.sml par.sml par-no.sml par-no2.sml
 
 .PHONY: all
-all: test tests.sml
+all: test tests.txt
 	$(MAKE) -C pmsort all
 	$(MAKE) -C slmsort all
 	$(MAKE) -C ray all
@@ -17,7 +17,7 @@ all: test tests.sml
 test:
 	$(KITTESTER) "$(REML)" --logdirect all.tst
 
-tests.sml: $(REMLSOURCES)
+tests.txt: $(REMLSOURCES)
 	echo '(* Testfiles *)' > $@
 	for x in $(REMLSOURCES) ; do \
           echo "\n(*** SOURCE $$x ***)" >> $@; \
@@ -34,7 +34,7 @@ tests.sml: $(REMLSOURCES)
 
 .PHONY: clean
 clean:
-	rm -rf *~ *.log test_report.html MLB KITversion TESTmessages *.out runexe tests.sml all.sml
+	rm -rf *~ *.log test_report.html MLB KITversion TESTmessages *.out runexe tests.sml tests.txt all.sml
 	$(MAKE) -C pmsort clean
 	$(MAKE) -C slmsort clean
 	$(MAKE) -C ray clean
