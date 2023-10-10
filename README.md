@@ -19,6 +19,12 @@ You can then run the image with:
 $ docker run -it reml-popl24:latest
 ```
 
+or
+
+```
+$ docker run --platform linux/amd64 -it reml-popl24:latest
+```
+
 This command will put you into a shell inside a directory containing
 the experimental infrastructure.  Run `make all` to compile and run the
 ReML test suite and all the examples. Running `make all` should take less
@@ -47,6 +53,20 @@ present in the `reml-popl24` directory:
 
 The `reml-demo` directory contains a series of ReML tests and a few
 serious examples.
+
+## List of Claims
+
+The artifact establishes the following main claims mantioned in the
+paper:
+
+1. ReML has been implemented and syntactic constructs are available on
+   top of Standard ML syntax to control the underlying region
+   inference process (Introduction and Section 4.)
+
+2. A few larger ReML examples demonstrate how ReML can be used to
+   reason about effects and in particular about the lack of allocation
+   races (Mergesort, ray tracing, Mandelbrot).
+
 
 ## Tutorial
 
@@ -309,8 +329,10 @@ that compile successfully expects a file `file.mlb.out.ok`. To add a
 new test, you may copy one of the existing tests, rename it, and add
 it to the `all.tst` file in the `reml-demo` folder. Examples that are
 expected to halt with a compile time error appears with an "ecte"
-entry in the `all.tst` file. Examples are responsible for doing their
-own validation by writing to stderr (e.g., using `print`).
+entry in the `all.tst` file, which is processed by the `kittester`
+helper application (installed together with ReML and MLKit). The
+examples are responsible for doing their own validation by writing to
+`stdout` (e.g., using `print`).
 
 ## System Requirements
 

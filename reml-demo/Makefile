@@ -22,11 +22,11 @@ tests.sml: $(REMLSOURCES)
 	for x in $(REMLSOURCES) ; do \
           echo "\n(*** SOURCE $$x ***)" >> $@; \
           cat -n $$x >> $@; \
-          if [ -a $$x.out.ok ]; then \
+          if [ -e $$x.out.ok ]; then \
              echo "\n(*** COMPILE SUCCESS - EXECUTION OUTPUT ***)" >> $@; \
              cat $$x.out.ok | sed 's/^/     /' >> $@; \
           fi; \
-          if [ -a $$x.log.ok ]; then \
+          if [ -e $$x.log.ok ]; then \
              echo "\n(*** COMPILE FAILURE - COMPILER OUTPUT ***)" >> $@; \
              cat $$x.log.ok | sed 's/^/     /' | grep -v 'Stopping compilation' >> $@; \
           fi; \

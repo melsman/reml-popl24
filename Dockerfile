@@ -23,6 +23,7 @@ RUN make -C mlkit-bin-dist-linux install PREFIX=/home/art/mlkit
 ENV PATH=/home/art/mlkit/bin:$PATH
 ENV SML_LIB=/home/art/mlkit/lib/mlkit
 RUN rm -rf mlkit-bin-dist-linux*
+RUN reml -c /home/art/mlkit/lib/mlkit/basis/basis.mlb
 
 WORKDIR /home/art
 
@@ -34,7 +35,7 @@ WORKDIR /home/art/reml-popl24
 
 # Install MLKit src
 ADD --chown=art https://github.com/melsman/mlkit/archive/refs/tags/v4.7.5.tar.gz ./
-RUN tar xf v4.7.4.tar.gz
-RUN rm -f v4.7.4.tar.gz
+RUN tar xf v4.7.5.tar.gz
+RUN rm -f v4.7.5.tar.gz
 
 CMD bash

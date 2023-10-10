@@ -14,7 +14,7 @@ all: test
 
 .PHONY: test
 test:
-	SML_LIB=$(ROOT) $(REML) $(FLAGS) -c par-reml.mlb
+	$(REML) $(FLAGS) -c par-reml.mlb
 
 .PHONY: clean
 clean:
