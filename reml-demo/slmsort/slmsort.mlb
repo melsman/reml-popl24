@@ -1,0 +1,10 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/basis/real64_blocks.mlb
+  ../../reml-basis/par-reml.mlb
+  ../util/BinarySearch.sml
+  ../util/CommandLineArgs.sml
+  ../util/Timing.sml
+in
+  slmsort.sml
+end

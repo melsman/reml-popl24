@@ -1,0 +1,4 @@
+-f not passed, so not writing image to file.
+[Runs: 1]
+Benchmark: Generating Mandelbrot image
+Evaluation: OK
